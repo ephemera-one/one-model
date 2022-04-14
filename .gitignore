@@ -1,2 +1,4 @@
 env/
 *.blend1
+*.sqlite3
+*.pyc
