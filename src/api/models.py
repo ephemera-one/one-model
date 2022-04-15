@@ -3,13 +3,13 @@ import uuid
 from django.db import models
 
 
-class BlenderProjects(models.Model):
+class BlenderProject(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    project_file = models.FileField()
+    file = models.FileField(upload_to="projects")
 
 
 class GeneratorTask(models.Model):
-    created_at = models.DateField(auto_now=True)
+    created_at = models.DateTimeField(auto_now=True)
     project_id = models.UUIDField()
     data = models.TextField()
 
@@ -21,7 +21,7 @@ class GeneratorTask(models.Model):
         max_length=5, choices=FILE_FORMAT_CHOICES, default=PNG
     )
 
-    output_file = models.FileField()
+    output_file = models.FileField(upload_to="outputs")
 
     CREATED = "created"
     RUNNING = "running"
