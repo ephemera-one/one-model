@@ -46,7 +46,7 @@ class GeneratorTaskViewSet(ModelViewSet):
                 project_id=project_id,
             )
 
-            generator_task(task.id, project_id, data, file_format)
+            generator_task.delay(task.id, project_id, data, file_format)
 
             return Response(
                 {"id": task.id},

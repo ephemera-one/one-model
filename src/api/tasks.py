@@ -1,13 +1,13 @@
 import uuid
-from pathlib import Path
 from tempfile import NamedTemporaryFile
 
-from django.conf import settings
 from django.core.files import File
+from one_model import celery_app
 
 from .models import BlenderProject, GeneratorTask
 
 
+@celery_app.task
 def generator_task(id: str, project_id: str, data: str, file_format: str):
     generator_task = GeneratorTask.objects.get(pk=id)
     generator_task.status = GeneratorTask.RUNNING

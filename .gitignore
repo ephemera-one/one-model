@@ -1,5 +1,5 @@
 env/
-src/media/*.blend
+src/media/**
 *.blend1
 *.sqlite3
 *.pyc
