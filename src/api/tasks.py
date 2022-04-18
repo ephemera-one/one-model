@@ -17,6 +17,8 @@ def generator_task(id: str, project_id: str, data: str, file_format: str):
 
     import bpy
 
+    bpy.context.scene.render.engine = "CYCLES"
+
     bpy.ops.wm.open_mainfile(filepath=project_file.path)
     bpy.ops.preferences.addon_enable(module="sverchok-master")
 
