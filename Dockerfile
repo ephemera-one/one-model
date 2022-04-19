@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Installing Blender native dependencies
 RUN apt-get update && apt-get install -y \
-  libxxf86vm1 libxfixes3 libgl1 \
+  libxxf86vm1 libxfixes3 libgl1 libpq-dev \
   && rm -rf /var/lib/apt/lists/*
 
 # Installing python libraries

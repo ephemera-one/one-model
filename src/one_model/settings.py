@@ -81,8 +81,11 @@ WSGI_APPLICATION = "one_model.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DB_NAME", "onemodel"),
+        "USER": os.getenv("DB_USER", "postgres"),
+        "PASSWORD": os.getenv("DB_PASSWORD", "postgres"),
+        "HOST": os.getenv("DB_HOST", "localhost"),
     }
 }
 
@@ -130,5 +133,5 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CELERY_RESULT_BACKEND = "django-db"
-REDIS_HOSTNAME = os.getenv("REDIS_HOSTNAME", "localhost")
-CELERY_BROKER_URL = f"redis://{REDIS_HOSTNAME}:6379"
+REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
+CELERY_BROKER_URL = f"redis://{REDIS_HOST}:6379"
