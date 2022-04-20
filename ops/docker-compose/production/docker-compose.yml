@@ -1,0 +1,40 @@
+version: "2"
+
+services:
+  redis:
+    image: docker.io/bitnami/redis:6.2
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - 6379
+    volumes:
+      - "/opt/one-model/redis-data:/bitnami/redis/data"
+
+  db:
+    image: postgres:14.2
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432
+    volumes:
+      - "/opt/one-model/pg-data:/var/lib/postgresql/data"
+
+  one-model-app:
+    image: one-model:latest
+    pull: always
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=redis
+      - DB_HOST=db
+
+  one-model-celery:
+    image: one-model:latest
+    pull: always
+    environment:
+      - REDIS_HOST=redis
+      - DB_HOST=db
+    cmd: "celery -A one_model worker"
