@@ -28,7 +28,7 @@ SECRET_KEY = "django-insecure-6$1ee)m^)4aznj$8^wu2q$-%k#ab4*ceyo-qia_2wulua0xa(p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["onemodel.cognita.dev", "159.69.185.67"]
 
 
 # Application definition
