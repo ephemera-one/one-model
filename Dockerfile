@@ -21,5 +21,7 @@ RUN cd install_sverchok && python install_sverchok.py && rm -rf /app/install_sve
 
 COPY ./src /app/
 
-CMD ["gunicorn", "--bind=0.0.0.0", "--workers=4", "--log-file=-", "--access-logfile=-", "one_model.wsgi"]
+CMD python manage.py collectstatic --noinput; \
+    python manage.py migrate; \
+    gunicorn --bind=0.0.0.0 --workers=4 --log-file=- --access-logfile=- one_model.wsgi
 

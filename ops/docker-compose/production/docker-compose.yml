@@ -32,6 +32,8 @@ services:
     environment:
       - REDIS_HOST=redis
       - DB_HOST=db
+    volumes:
+      - "/opt/one-model/volumes/media:/app/media"
 
   one-model-celery:
     image: ghcr.io/ephemera-one/one-model:latest
@@ -40,4 +42,6 @@ services:
     environment:
       - REDIS_HOST=redis
       - DB_HOST=db
+    volumes:
+      - "/opt/one-model/volumes/media:/app/media"
     command: "celery -A one_model worker"
