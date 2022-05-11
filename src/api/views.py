@@ -39,11 +39,13 @@ class GeneratorTaskViewSet(ModelViewSet):
             project_id: str = validated_data["project_id"]
             data: str = validated_data["data"]
             file_format: str = validated_data["file_format"]
+            callback_url: str = validated_data["callback_url"]
 
             task = GeneratorTask.objects.create(
                 data=data,
                 file_format=file_format,
                 project_id=project_id,
+                callback_url=callback_url,
             )
 
             generator_task.delay(task.id, project_id, data, file_format)

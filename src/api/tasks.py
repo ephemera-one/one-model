@@ -1,6 +1,7 @@
 import uuid
 from tempfile import NamedTemporaryFile
 
+import requests
 from django.core.files import File
 from one_model import celery_app
 
@@ -41,3 +42,8 @@ def generator_task(id: str, project_id: str, data: str, file_format: str):
         generator_task.output_file.save(f"{uuid.uuid4()}.{file_format}", output_file)
         generator_task.status = GeneratorTask.COMPLETED
         generator_task.save()
+
+        requests.patch(
+            generator_task.callback_url,
+            {"image_url": generator_task.output_file.url, "status": "generated"},
+        )

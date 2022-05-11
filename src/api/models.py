@@ -22,6 +22,7 @@ class GeneratorTask(models.Model):
     )
 
     output_file = models.FileField(upload_to="outputs")
+    callback_url = models.CharField(max_length=300, default="")
 
     CREATED = "created"
     RUNNING = "running"
