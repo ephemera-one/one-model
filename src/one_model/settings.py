@@ -26,7 +26,7 @@ MEDIA_ROOT = Path.joinpath(BASE_DIR, "media/")
 SECRET_KEY = "django-insecure-6$1ee)m^)4aznj$8^wu2q$-%k#ab4*ceyo-qia_2wulua0xa(p"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "true").lower() == "true"
 
 ALLOWED_HOSTS = ["onemodel.cognita.dev", "159.69.185.67", "localhost"]
 

@@ -28,10 +28,11 @@ services:
     restart: always
     pull_policy: always
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     environment:
       - REDIS_HOST=redis
       - DB_HOST=db
+      - DEBUG=false
     volumes:
       - "/opt/one-model/volumes/media:/app/media"
 
@@ -42,6 +43,7 @@ services:
     environment:
       - REDIS_HOST=redis
       - DB_HOST=db
+      - DEBUG=false
     volumes:
       - "/opt/one-model/volumes/media:/app/media"
     command: "celery -A one_model worker"
