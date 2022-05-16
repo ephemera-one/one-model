@@ -1,11 +1,16 @@
 import uuid
 
+from django.core.files.storage import FileSystemStorage
 from django.db import models
+from storages.backends.s3boto3 import S3Boto3Storage
+
+fs = FileSystemStorage()
+s3 = S3Boto3Storage()
 
 
 class BlenderProject(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    file = models.FileField(upload_to="projects")
+    file = models.FileField(upload_to="projects", storage=fs)
 
 
 class GeneratorTask(models.Model):
@@ -21,8 +26,8 @@ class GeneratorTask(models.Model):
         max_length=5, choices=FILE_FORMAT_CHOICES, default=PNG
     )
 
-    output_file = models.FileField(upload_to="outputs")
-    callback_url = models.CharField(max_length=300, default="")
+    output_file = models.FileField(upload_to="outputs", storage=s3)
+    callback_url = models.CharField(max_length=300, default="", blank=True)
 
     CREATED = "created"
     RUNNING = "running"

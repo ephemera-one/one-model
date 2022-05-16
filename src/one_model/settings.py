@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
+import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -139,3 +141,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CELERY_RESULT_BACKEND = "django-db"
 REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
 CELERY_BROKER_URL = f"redis://{REDIS_HOST}:6379"
+
+AWS_STORAGE_BUCKET_NAME = "cognita-dev"
+AWS_QUERYSTRING_AUTH = False
+
+if DEBUG:
+    env = environ.Env()
+    environ.Env.read_env(os.path.join(BASE_DIR, ".env.dev"))
+
+    AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")

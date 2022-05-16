@@ -4,3 +4,4 @@ src/static/**
 *.blend1
 *.sqlite3
 *.pyc
+.env.dev
