@@ -1,4 +1,3 @@
-import uuid
 from tempfile import NamedTemporaryFile
 
 import requests
@@ -68,8 +67,11 @@ def generator_task(id: str, project_id: str, data: str, file_format: str):
 
         output_file = File(open(tmp_name, "rb"))
 
-        generator_task.output_file.save(f"{uuid.uuid4()}.{file_format}", output_file)
-        # generator_task.output_file = output_file
+        generator_task.output_file.save(
+            f"living_nft_{generator_task.id}.{file_format}",
+            output_file,
+        )  # TODO: Move file prefix to settings
+
         generator_task.status = GeneratorTask.COMPLETED
         generator_task.save()
 
