@@ -72,10 +72,13 @@ def generator_task(id: str, project_id: str, data: str, file_format: str):
         generator_task.status = GeneratorTask.COMPLETED
         generator_task.save()
 
-    requests.patch(
-        generator_task.callback_url,
-        {"image_url": generator_task.output_file.url, "status": "generated"},
-    )
+    callback_url = generator_task.callback_url
+
+    if callback_url:
+        requests.patch(
+            callback_url,
+            {"image_url": generator_task.output_file.url, "status": "generated"},
+        )
 
     clean_blocks()
 
