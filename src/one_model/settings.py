@@ -145,9 +145,9 @@ CELERY_BROKER_URL = f"redis://{REDIS_HOST}:6379"
 AWS_STORAGE_BUCKET_NAME = "cognita-dev"
 AWS_QUERYSTRING_AUTH = False
 
+env = environ.Env()
 if DEBUG:
-    env = environ.Env()
     environ.Env.read_env(os.path.join(BASE_DIR, ".env.dev"))
 
-    AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
-    AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
