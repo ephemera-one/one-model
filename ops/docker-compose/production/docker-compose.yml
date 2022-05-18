@@ -33,6 +33,8 @@ services:
       - REDIS_HOST=redis
       - DB_HOST=db
       - DEBUG=false
+      - AWS_ACCESS_KEY_ID=SETUP!
+      - AWS_SECRET_ACCESS_KEY=SETUP!
     volumes:
       - "/opt/one-model/volumes/media:/app/media"
 
@@ -44,6 +46,8 @@ services:
       - REDIS_HOST=redis
       - DB_HOST=db
       - DEBUG=false
+      - AWS_ACCESS_KEY_ID={SET!}
+      - AWS_SECRET_ACCESS_KEY={SET!}
     volumes:
       - "/opt/one-model/volumes/media:/app/media"
     command: "celery -A one_model worker --max-tasks-per-child=1"
