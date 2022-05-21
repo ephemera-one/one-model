@@ -142,7 +142,7 @@ CELERY_RESULT_BACKEND = "django-db"
 REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
 CELERY_BROKER_URL = f"redis://{REDIS_HOST}:6379"
 
-AWS_STORAGE_BUCKET_NAME = "cognita-dev"
+AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME", "cognita-dev"),
 AWS_QUERYSTRING_AUTH = False
 
 env = environ.Env()
