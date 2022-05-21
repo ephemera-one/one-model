@@ -31,6 +31,7 @@ def generator_task(id: str, project_id: str, data: str, file_format: str):
     # Needed for refreshing data in Blender
     def update_data(filepath, data):
         print("Updating data")
+        print(filepath)
 
         bpy.ops.wm.open_mainfile(filepath=filepath)
 
@@ -86,5 +87,7 @@ def generator_task(id: str, project_id: str, data: str, file_format: str):
     clean_blocks()
 
     bpy.ops.wm.window_close()
+
+    print(f"Rendered {project_file.path}")
 
     # bpy.ops.wm.read_factory_settings()
